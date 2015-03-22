@@ -5,5 +5,6 @@ exports.Markdown         = require("./markdown");
 exports.Modal            = require("./modal");
 exports.OrganizationCard = require("./organization-card");
 exports.Panel            = require("./panel");
+exports.RewardCard       = require("./reward-card");
 exports.SquareImage      = require("./square-image");
 exports.SquareImageInput = require("./square-image-input");

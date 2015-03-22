@@ -73,11 +73,20 @@ var CampaignEdit = React.createClass({
         editAutosave.getMixin("campaigns", campaignType, campaignOptions)
     ],
     launch: function () {
-        console.warn("TODO - implement");
-        console.log("3... 2... 1... Launch!");
+        ceres.getCollection("campaigns").update(
+            this.getParams()._id,
+            {public: true}
+        );
     },
     componentWillMount: function () {
         ceres.subscribe("campaigns:byId", this.getParams()._id);
+    },
+    renderPublishButton: function () {
+        return (
+            this.props.campaigns.getIn([this.getParams()._id, "public"]) ?
+            null :
+            <button onClick={this.launch}>Launch</button>
+        );
     },
     render: function () {
         return (
@@ -96,9 +105,7 @@ var CampaignEdit = React.createClass({
                                 fields={"title"}
                             />
                             <br />
-                            <button onClick={this.launch}>
-                                launch
-                            </button>
+                            {this.renderPublishButton()}
                         </pure.Col>
                         <pure.Col md={"1-1"}>
                             <components.AutosaveForm
