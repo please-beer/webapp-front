@@ -59,3 +59,42 @@ var delta = function delta (obj_1, obj_2) {
     }, obj_2);
 };
 exports.delta = delta;
+
+var dataURLToFile = function (dataURL) {
+    /*
+    *   The dataURL is a string like:
+    *
+    *   data:image/png;base64,iVBORw0KGgoAAA...
+    *
+    *   First we split it at the comma. Now parts[0] holds the metadata, while
+    *   parts[1] holds the content.
+    */
+    var parts = dataURL.split(",");
+    /*
+    *   Build Uint8Array from the content
+    */
+    var content = atob(parts[1]);
+    var array = [];
+    for (var i=0; i<content.length; i++) {
+        array.push(content.charCodeAt(i));
+    }
+    var uint8Array = new Uint8Array(array);
+    /*
+    *   Parse out the mime type from the metadata.
+    */
+    var mime = parts[0].split(":")[1].split(";")[0];
+    /*
+    *   Build and return the Blob.
+    */
+    return new Blob([uint8Array], {type: mime});
+};
+exports.dataURLToFile = dataURLToFile;
+
+var fileToDataURL = function (file, cb) {
+    var reader = new FileReader();
+    reader.onload = function (evt) {
+        cb(evt.target.result);
+    };
+    reader.readAsDataURL(file);
+};
+exports.fileToDataURL = fileToDataURL;

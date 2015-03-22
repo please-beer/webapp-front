@@ -26,14 +26,17 @@
   },
   "dependencies": {
     "asteroid": "^0.6.1",
+    "bluebird": "^2.9.14",
     "immutable": "^3.6.4",
     "purecss": "^0.6.0",
     "ramda": "^0.11.0",
     "react": "^0.13.1",
+    "react-avatar-editor": "git://github.com/please-beer/react-avatar-editor",
     "react-router": "^0.13.1",
     "remarkable": "^1.6.0",
     "tcomb": "^1.0.0",
-    "tcomb-form": "^0.4.4"
+    "tcomb-form": "^0.4.4",
+    "tcomb-validation": "^1.0.1"
   },
   "license": "MIT"
 }

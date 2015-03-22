@@ -23,15 +23,19 @@ exports.getControllerViewMixin = function getControllerViewMixin (collectionsNam
     });
     return {
         getInitialState: function () {
-            return getUpdatedState(null, collections);
+            return R.merge(getUpdatedState(null, collections), {
+                user: Immutable.Map()
+            });
         },
         updateStateForCollection: function (collection) {
             var newState = getUpdatedState(this.state, [collection]);
             this.setState(newState);
         },
         setUserId: function () {
+            var user = ceres.collections.users._set._items[ceres.userId] || {};
             this.setState({
-                userId: ceres.userId
+                userId: ceres.userId,
+                user: Immutable.fromJS(user)
             });
         },
         componentDidMount: function(){

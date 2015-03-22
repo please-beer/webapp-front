@@ -5,6 +5,7 @@ var t     = require("tcomb-form");
 var components   = require("components");
 var pure         = require("lib/pure");
 var editAutosave = require("lib/edit-autosave");
+var RouterMixin  = require("lib/router-mixin");
 
 var dateTransformer = {
     // Converts timestamp to datestring
@@ -19,6 +20,7 @@ var dateTransformer = {
 var campaignType = t.struct({
     title: t.Str,
     text: t.Str,
+    imageUrl: t.Str,
     startDate: t.Num,
     endDate: t.Num,
     goal: t.Num,
@@ -33,6 +35,12 @@ var campaignOptions = {
     fields: {
         text: {
             type: "textarea"
+        },
+        imageUrl: {
+            factory: components.SquareImageInput,
+            config: {
+                size: 200
+            }
         },
         startDate: {
             type: "date",
@@ -60,6 +68,7 @@ var campaignOptions = {
 
 var CampaignEdit = React.createClass({
     mixins: [
+        RouterMixin,
         editAutosave.getMixin("campaigns", campaignType, campaignOptions)
     ],
     launch: function () {
@@ -70,14 +79,22 @@ var CampaignEdit = React.createClass({
         return (
             <div className="av-campaign-edit">
                 <pure.Grid>
-                    <pure.Col md={"2-3"}>
-                        <components.AutosaveForm
-                            {...this.getBaseAutosaveFormProps()}
-                            fields={"title"}
-                        />
-                        <button onClick={this.launch}>
-                            launch
-                        </button>
+                    <pure.Col md={"2-3"} gutter={0}>
+                        <pure.Col md={"2-5"} gutter={0}>
+                            <components.AutosaveForm
+                                {...this.getBaseAutosaveFormProps()}
+                                fields={"imageUrl"}
+                            />
+                        </pure.Col>
+                        <pure.Col md={"3-5"} gutter={0}>
+                            <components.AutosaveForm
+                                {...this.getBaseAutosaveFormProps()}
+                                fields={"title"}
+                            />
+                            <button onClick={this.launch}>
+                                launch
+                            </button>
+                        </pure.Col>
                     </pure.Col>
                     <pure.Col md={"1-3"}>
                         <components.AutosaveForm
