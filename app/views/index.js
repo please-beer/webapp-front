@@ -4,4 +4,5 @@ exports.Home             = require("./home");
 exports.NotFound         = require("./not-found");
 exports.OrganizationEdit = require("./organization-edit");
 exports.OrganizationView = require("./organization-view");
+exports.Profile          = require("./profile");
 exports.Root             = require("./root");

@@ -48,6 +48,7 @@ var OrganizationEdit = React.createClass({
         });
     },
     componentWillMount: function () {
+        ceres.subscribe("organizations:byId", this.getParams()._id);
         ceres.subscribe("campaigns:byOrganization", this.getParams()._id);
     },
     renderCampaigns: function () {
@@ -92,17 +93,13 @@ var OrganizationEdit = React.createClass({
                         </pure.Col>
                     </pure.Col>
                     <pure.Col md={"1-3"}>
-                        <pure.Col>
-                            <p>
-                                Campaigns:
-                            </p>
-                            {this.renderCampaigns()}
-                            <p>
-                                <button onClick={this.createCampaign}>
-                                    New
-                                </button>
-                            </p>
-                        </pure.Col>
+                        <p>{"Campaigns:"}</p>
+                        {this.renderCampaigns()}
+                        <p>
+                            <button onClick={this.createCampaign}>
+                                {"New"}
+                            </button>
+                        </p>
                     </pure.Col>
                 </pure.Grid>
             </div>

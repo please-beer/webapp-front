@@ -9,15 +9,15 @@ var ceres = require("lib/ceres");
 var AutosaveForm = React.createClass({
     propTypes: {
         /*
-        *   The immutable map of the collection
+        *   The immutable map of the collection.
         */
         collection: React.PropTypes.instanceOf(Immutable.Map).isRequired,
         /*
-        *   The name of the collection
+        *   The name of the collection.
         */
         collectionName: React.PropTypes.string.isRequired,
         /*
-        *   tcomb type of the elements in the collection. Must be a tcomb struct
+        *   tcomb type of the elements in the collection. Must be a tcomb struct.
         */
         type: function (props) {
             if (R.path(["type", "meta", "kind"], props) !== "struct") {
@@ -29,9 +29,13 @@ var AutosaveForm = React.createClass({
             }
         },
         /*
-        *   The _id of the item we wish to edit
+        *   The _id of the item we wish to edit.
         */
         itemId: React.PropTypes.string.isRequired,
+        /*
+        *   The path at which to operate
+        */
+        path: React.PropTypes.arrayOf(React.PropTypes.string),
         /*
         *   The fields we wish to edit. Defaults to all.
         */
@@ -40,7 +44,7 @@ var AutosaveForm = React.createClass({
             React.PropTypes.arrayOf(React.PropTypes.string)
         ]),
         /*
-        *   Options for the tcomb form component
+        *   Options for the tcomb form component.
         */
         options: React.PropTypes.object
     },
@@ -65,7 +69,26 @@ var AutosaveForm = React.createClass({
         *   saving changes.
         */
         if (delta !== null) {
-            ceres.getCollection(this.props.collectionName).update(this.props.itemId, delta);
+            /*
+            *   If the updatePath is defined, use it to construct the correct
+            *   modifier for the operation. Otherwise, the update is occurring
+            *   at the root level, therefore delta itself is the correct
+            *   modifier.
+            */
+            var modifier;
+            if (this.props.path && this.props.path.length > 0) {
+                var path = this.props.path.join(".");
+                modifier = R.pipe(
+                    R.toPairs,
+                    R.map(R.apply(function (key, val) {
+                        return [path + "." + key, val];
+                    })),
+                    R.fromPairs
+                )(delta);
+            } else {
+                modifier = delta;
+            }
+            ceres.getCollection(this.props.collectionName).update(this.props.itemId, modifier);
         }
     }, 1000),
     onChange: function (value) {
@@ -87,7 +110,15 @@ var AutosaveForm = React.createClass({
         this.save(this.refs.form.getValue());
     },
     getValueFromProps: function (props) {
-        return (props.collection.get(props.itemId) || Immutable.Map()).toJS();
+        var path = (
+            props.path ?
+            [props.itemId].concat(props.path) :
+            [props.itemId]
+        );
+        return (
+            props.collection.getIn(path) ||
+            Immutable.Map()
+        ).toJS();
     },
     getInitialState: function () {
         return {
@@ -102,12 +133,6 @@ var AutosaveForm = React.createClass({
         this.setState({
             value: R.merge(this.getValueFromProps(props), this.state.value)
         });
-    },
-    componentWillMount: function () {
-        /*
-        *   We're assuming a publication named `collectionName:byId` exists.
-        */
-        ceres.subscribe(this.props.collectionName + ":byId", this.props.itemId);
     },
     render: function () {
         return (

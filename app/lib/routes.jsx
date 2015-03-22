@@ -9,6 +9,7 @@ module.exports = (
         <Router.Route name="campaignView" path="campaign/:_id/" handler={views.CampaignView} />
         <Router.Route name="organizationEdit" path="organization/:_id/edit/" handler={views.OrganizationEdit} />
         <Router.Route name="organizationView" path="organization/:_id/" handler={views.OrganizationView} />
+        <Router.Route name="profile" path="profile/" handler={views.Profile} />
         <Router.DefaultRoute handler={views.Home} />
     </Router.Route>
 );

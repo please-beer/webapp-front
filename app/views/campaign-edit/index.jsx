@@ -4,6 +4,7 @@ var t     = require("tcomb-form");
 
 var components   = require("components");
 var pure         = require("lib/pure");
+var ceres        = require("lib/ceres");
 var editAutosave = require("lib/edit-autosave");
 var RouterMixin  = require("lib/router-mixin");
 
@@ -75,44 +76,50 @@ var CampaignEdit = React.createClass({
         console.warn("TODO - implement");
         console.log("3... 2... 1... Launch!");
     },
+    componentWillMount: function () {
+        ceres.subscribe("campaigns:byId", this.getParams()._id);
+    },
     render: function () {
         return (
             <div className="av-campaign-edit">
                 <pure.Grid>
                     <pure.Col md={"2-3"} gutter={0}>
-                        <pure.Col md={"2-5"} gutter={0}>
+                        <pure.Col md={"2-5"}>
                             <components.AutosaveForm
                                 {...this.getBaseAutosaveFormProps()}
                                 fields={"imageUrl"}
                             />
                         </pure.Col>
-                        <pure.Col md={"3-5"} gutter={0}>
+                        <pure.Col md={"3-5"}>
                             <components.AutosaveForm
                                 {...this.getBaseAutosaveFormProps()}
                                 fields={"title"}
                             />
+                            <br />
                             <button onClick={this.launch}>
                                 launch
                             </button>
                         </pure.Col>
+                        <pure.Col md={"1-1"}>
+                            <components.AutosaveForm
+                                {...this.getBaseAutosaveFormProps()}
+                                fields={"text"}
+                            />
+                        </pure.Col>
                     </pure.Col>
-                    <pure.Col md={"1-3"}>
-                        <components.AutosaveForm
-                            {...this.getBaseAutosaveFormProps()}
-                            fields={"goal currency startDate endDate"}
-                        />
-                    </pure.Col>
-                    <pure.Col md={"2-3"}>
-                        <components.AutosaveForm
-                            {...this.getBaseAutosaveFormProps()}
-                            fields={"text"}
-                        />
-                    </pure.Col>
-                    <pure.Col md={"1-3"}>
-                        <components.AutosaveForm
-                            {...this.getBaseAutosaveFormProps()}
-                            fields={"rewards"}
-                        />
+                    <pure.Col md={"1-3"} gutter={0}>
+                        <pure.Col md={"1-1"}>
+                            <components.AutosaveForm
+                                {...this.getBaseAutosaveFormProps()}
+                                fields={"goal currency startDate endDate"}
+                            />
+                        </pure.Col>
+                        <pure.Col md={"1-1"}>
+                            <components.AutosaveForm
+                                {...this.getBaseAutosaveFormProps()}
+                                fields={"rewards"}
+                            />
+                        </pure.Col>
                     </pure.Col>
                 </pure.Grid>
             </div>
