@@ -1,0 +1,13 @@
+{
+    "css": [
+        "node_modules/purecss/build/base.css",
+        "node_modules/purecss/build/grids.css",
+        "node_modules/purecss/build/grids-responsive.css"
+    ],
+    "js": [
+        "node_modules/asteroid/node_modules/q/q.js",
+        "node_modules/asteroid/node_modules/ddp.js/src/ddp.js",
+        "node_modules/asteroid/dist/asteroid.browser.js",
+        "node_modules/asteroid/dist/plugins/facebook-login.js"
+    ]
+}
