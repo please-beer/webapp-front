@@ -1,5 +1,5 @@
-#<img src="app/assets/images/logo.png" width="12" /> flames
-Minimal reddit / HN clone made with React and Meteor (front-end)
+#<img src="app/assets/images/logo.png" width="12" /> Please.beer
+Please.beer / HN clone made with React and Meteor (front-end)
 
 ##Development environment setup
 After cloning the repository, run `npm install` to install all dependencies, and
