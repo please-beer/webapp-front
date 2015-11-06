@@ -1,11 +1,12 @@
 var React        = require("react");
 var AvatarEditor = require("react-avatar-editor");
+var LinkedStateMixin = require('react-addons-linked-state-mixin');
 
 var components = require("components");
 var utils      = require("lib/utils");
 
 var EditingModal = React.createClass({
-    mixins: [React.addons.LinkedStateMixin],
+    mixins: [LinkedStateMixin],
     propTypes: {
         onEditEnd: React.PropTypes.func
     },

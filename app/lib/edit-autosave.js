@@ -7,7 +7,7 @@ exports.getMixin = function (collectionName, type, options) {
                 collection: this.props[collectionName],
                 collectionName: collectionName,
                 type: type,
-                itemId: this.getParams()._id,
+                itemId: this.props.params._id,
                 options: options
             };
         }

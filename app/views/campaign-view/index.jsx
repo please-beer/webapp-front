@@ -1,11 +1,12 @@
 var Immutable = require("immutable");
 var R         = require("ramda");
 var React     = require("react");
+var Router     = require("react-router");
+var History     = Router.History;
 
 var components  = require("components");
 var ceres       = require("lib/ceres");
 var pure        = require("lib/pure");
-var RouterMixin = require("lib/router-mixin");
 
 var formatDate = function (timestamp) {
     var date = new Date(timestamp);
@@ -13,14 +14,14 @@ var formatDate = function (timestamp) {
 };
 
 var CampaignView = React.createClass({
-    mixins: [RouterMixin],
+    mixins: [History],
     pathTo: function (path) {
         return this.props.campaigns.getIn(
-            R.prepend(this.getParams()._id, path.split("."))
+            R.prepend(this.props.params._id, path.split("."))
         );
     },
     componentWillMount: function () {
-        ceres.subscribe("campaigns:byId", this.getParams()._id);
+        ceres.subscribe("campaigns:byId", this.props.params._id);
     },
     renderRewards: function () {
         return this.pathTo("rewards") && this.pathTo("rewards")

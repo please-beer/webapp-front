@@ -8,6 +8,8 @@
         "node_modules/asteroid/node_modules/q/q.js",
         "node_modules/asteroid/node_modules/ddp.js/src/ddp.js",
         "node_modules/asteroid/dist/asteroid.browser.js",
+        "node_modules/asteroid/dist/plugins/twitter-login.js",
+        "node_modules/asteroid/dist/plugins/google-login.js",
         "node_modules/asteroid/dist/plugins/facebook-login.js"
     ]
 }

@@ -1,10 +1,11 @@
 var React  = require("react");
+var ReactDOM  = require("react-dom");
 var Router = require("react-router");
+var Link = Router.Link;
 
 var components    = require("components");
 var ceres         = require("lib/ceres");
 var ReactAsteroid = require("lib/react-asteroid");
-
 var Root = React.createClass({
     mixins: [
         ReactAsteroid.getControllerViewMixin(["campaigns", "organizations", "users"])
@@ -16,11 +17,11 @@ var Root = React.createClass({
                     <components.Header {...this.state} />
                 </div>
                 <div className="content">
-                    <Router.RouteHandler {...this.state} />
+                   {React.cloneElement(this.props.children, {...this.state})}
                 </div>
             </div>
         );
     }
 });
-
+        
 module.exports = Root;

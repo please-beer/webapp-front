@@ -18,7 +18,7 @@ var Home = React.createClass({
                     <components.CampaignCard
                         key={campaign.get("_id")}
                         campaign={campaign}
-                        linkTo={"View"}
+                        linkTo={"view"}
                     />
                 );
             })

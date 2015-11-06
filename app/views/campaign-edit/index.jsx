@@ -1,6 +1,8 @@
 var R     = require("ramda");
 var React = require("react");
 var t     = require("tcomb-form");
+var Router     = require("react-router");
+var History     = Router.History;
 
 var components   = require("components");
 var pure         = require("lib/pure");
@@ -69,21 +71,21 @@ var campaignOptions = {
 
 var CampaignEdit = React.createClass({
     mixins: [
-        RouterMixin,
+        History,
         editAutosave.getMixin("campaigns", campaignType, campaignOptions)
     ],
     launch: function () {
         ceres.getCollection("campaigns").update(
-            this.getParams()._id,
+            this.props.prarams._id,
             {public: true}
         );
     },
     componentWillMount: function () {
-        ceres.subscribe("campaigns:byId", this.getParams()._id);
+        ceres.subscribe("campaigns:byId", this.props.params._id);
     },
     renderPublishButton: function () {
         return (
-            this.props.campaigns.getIn([this.getParams()._id, "public"]) ?
+            this.props.campaigns.getIn([this.props.params._id, "public"]) ?
             null :
             <button onClick={this.launch}>Launch</button>
         );

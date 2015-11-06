@@ -1,5 +1,6 @@
 var R     = require("ramda");
 var React = require("react");
+var ReactDOM = require("react-dom");
 var t     = require("tcomb-form");
 
 var components = require("components");
@@ -78,5 +79,4 @@ var Profile = React.createClass({
         );
     }
 });
-
 module.exports = Profile;

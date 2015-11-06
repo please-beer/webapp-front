@@ -40,9 +40,11 @@ exports.getControllerViewMixin = function getControllerViewMixin (collectionsNam
         },
         componentDidMount: function(){
             collections.forEach((function (collection) {
+                //if (collection.length)
+                {//TODO
                 var update = R.partial(this.updateStateForCollection, collection);
                 collection._set.on("put", update);
-                collection._set.on("del", update);
+                collection._set.on("del", update);}
             }).bind(this));
             ceres.on("login", this.setUserId);
             ceres.on("logout", this.setUserId);

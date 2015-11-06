@@ -11,6 +11,11 @@ var gutil        = require("gulp-util");
 var source       = require("vinyl-source-stream");
 var watchify     = require("watchify");
 var watch        = require("gulp-watch");
+var reactify     = require('reactify');
+
+var reactifyES6  = function(file) {
+  return reactify(file, {'es6': true});
+};
 
 
 
@@ -34,7 +39,7 @@ gulp.task("js", function () {
             .pipe(gulp.dest("./builds/assets/js/"))
             .pipe(reload({stream: true}));
     };
-    bundler.transform("reactify");
+    bundler.transform(reactifyES6);
     bundler.on("update", bundle);
     bundler.on("log", gutil.log);
     bundle();

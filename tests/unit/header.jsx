@@ -1,11 +1,12 @@
 var sinon = require("sinon");
 var should = require("should");
 var proxyquire = require("proxyquire").noCallThru();
-
-var React = require("react/addons");
+var React = require("react");
+var ReactDOMServer = require("react-dom/server");
 var Immutable = require("immutable");
-var u = React.addons.TestUtils;
-
+var u = require('react-addons-test-utils');
+const render = require('react-shallow-renderer')
+var assert = require('assert');
 // Instantiate a fake dom
 require("../test-dom.js")("<html><body></body></html>");
 
@@ -26,13 +27,11 @@ describe("The Header component", function () {
                 }
             }
         });
-        var header = u.findRenderedDOMComponentWithTag(
-            u.renderIntoDocument(<Header users={users} userId={"userId"} />),
-            "div"
+
+        var result = render(
+            <Header users={users} userId={"userId"} />
         );
-        var usernameSpan = React.renderToStaticMarkup(
-            header.props.children[1]
-        );
-        usernameSpan.should.match(reg("username"));
+        
+        should(result.props.children[1]).match(reg("username"));
     });
 });
