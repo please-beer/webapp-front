@@ -11,6 +11,7 @@ env:
 
 script:
     #- ./node_modules/.bin/jscs app/
-    - ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --compilers tests/compiler.js --report lcovonly -- -R spec tests/unit/**/*.jsx
-    - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-    - ./node_modules/.bin/mocha --compilers .:tests/compiler.js tests/unit/*.jsx
+    - npm test
+    #- ./node_modules/.bin/istanbul cover --hook-run-in-context ./node_modules/mocha/bin/_mocha --compilers tests/compiler.js --report lcovonly -- -R spec tests/unit/**/*.jsx
+    #- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+    #- ./node_modules/.bin/mocha --compilers .:tests/compiler.js tests/unit/*.jsx
