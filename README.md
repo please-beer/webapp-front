@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/please-beer/webapp-front.svg?branch=master)](https://travis-ci.org/please-beer/webapp-front)
-[![Coverage Status](https://img.shields.io/coveralls/please-beer/webapp-front.svg)](https://coveralls.io/r/please-beer/webapp-front?branch=master)
+[![Coverage Status](https://coveralls.io/repos/please-beer/webapp-front/badge.svg?branch=master&service=github)](https://coveralls.io/github/please-beer/webapp-front?branch=master)
 [![Dependency Status](https://david-dm.org/please-beer/webapp-front.svg)](https://david-dm.org/please-beer/webapp-front)
 [![devDependency Status](https://david-dm.org/please-beer/webapp-front/dev-status.svg)](https://david-dm.org/please-beer/webapp-front#info=devDependencies)
 
