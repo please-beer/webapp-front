@@ -13,4 +13,4 @@ script:
     #- ./node_modules/.bin/jscs app/
     #- ./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec tests/unit/**/*.js
     #- cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
-    - ./node_modules/.bin/mocha tests/unit/*.js
+    - ./node_modules/.bin/mocha tests/unit/*.jsx
