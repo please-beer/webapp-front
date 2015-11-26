@@ -82,6 +82,44 @@ gulp.task("tests", function () {
     runTests();
 });
 
+/*
+*   Task to run unit test and istanbul coverage with gulp-jsx-coverage
+*/
+require('gulp').task('coverage', require('gulp-jsx-coverage').createTask({
+    src: ["./tests/unit/**/*.jsx"],
+    istanbul: {
+        coverageVariable: '__MY_TEST_COVERAGE__',
+        exclude: /node_modules|test[0-9]/
+    },
+    transpile: {
+        babel: {
+            include: /\.jsx?$/,
+            exclude: /node_modules/,
+            omitExt: ['.jsx']
+        },
+        coffee: {
+            include: /\.coffee$/
+        }
+    },
+    coverage: {
+        reporters: ['text', 'json', 'lcov'],
+        directory: 'coverage'
+    },
+    mocha: {
+        reporter: 'spec'
+    },
+    babel: {
+        presets: ['es2015', 'react'],
+        sourceMap: 'both'
+    },
+    env: {
+        NODE_PATH: "./app/",
+    },
+    coffee: {
+        sourceMap: true
+    }
+}));
+
 
 
 /*

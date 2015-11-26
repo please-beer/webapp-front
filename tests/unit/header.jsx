@@ -10,7 +10,7 @@ var assert = require('assert');
 // Instantiate a fake dom
 require("../test-dom.js")("<html><body></body></html>");
 
-var Header = proxyquire("components/header/index.jsx", {
+var Header = proxyquire("../../app/components/header/index.jsx", {
     "lib/ceres": {}
 });
 
