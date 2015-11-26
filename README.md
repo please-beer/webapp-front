@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/please-beer/webapp-front.svg?branch=master)](https://travis-ci.org/please-beer/webapp-front)
+[![Coverage Status](https://img.shields.io/coveralls/please-beer/webapp-front.svg)](https://coveralls.io/r/please-beer/webapp-front?branch=master)
+[![Dependency Status](https://david-dm.org/please-beer/webapp-front.svg)](https://david-dm.org/please-beer/webapp-front)
+[![devDependency Status](https://david-dm.org/please-beer/webapp-front/dev-status.svg)](https://david-dm.org/please-beer/webapp-front#info=devDependencies)
+
 #<img src="app/assets/images/logo.png" width="12" /> Please.beer
 Please.beer / HN clone made with React and Meteor (front-end)
 
