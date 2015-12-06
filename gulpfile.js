@@ -184,6 +184,27 @@ gulp.task("css", function () {
 });
 
 
+/*
+*   Tasks to vendor image assets
+*/
+gulp.task("assets", function () {
+    var copyImages = function () {
+        gulp.src("./app/assets/images/**/*.*")
+            .pipe(gulp.dest("./builds/assets/images/"))
+            .pipe(reload({stream: true}));
+    };
+    watch("./app/assets/images/**/*.*", copyImages);
+    copyImages();
+
+    var copyFonts = function () {
+        gulp.src("./app/assets/fonts/**/*.*")
+            .pipe(gulp.dest("./builds/assets/fonts/"))
+            .pipe(reload({stream: true}));
+    };
+    watch("./app/assets/fonts/**/*.*", copyFonts);
+    copyFonts();
+});
+
 
 /*
 *   Task to setup the development server
@@ -218,6 +239,7 @@ gulp.task("default", [
     "js",
     "html",
     "css",
+    "assets",
     //"tests",
     "serve"
 ]);

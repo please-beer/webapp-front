@@ -27,6 +27,7 @@ var Header = React.createClass({
             <div className="inner-header">
                 <div className="white-header">{this.renderLogin()}</div>
                 <div className="ac-header">
+                    <div className="logo"><img src="/assets/images/please-beer.png" width="362px" height="auto"/></div>
                     <ul className="test-menu">
                         <li><a href="/">Home</a></li>
                         <li><a href="/profile">Profile</a></li>
