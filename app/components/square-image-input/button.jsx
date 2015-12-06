@@ -12,7 +12,7 @@ var Button = React.createClass({
         onChange: React.PropTypes.func
     },
     pickFile: function () {
-        this.refs.file.getDOMNode().click();
+        this.refs.file.click();
     },
     onFileAvailable: function (evt) {
         var file = evt.target.files[0];
