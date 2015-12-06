@@ -45,6 +45,9 @@ var SquareImageInput = React.createClass({
     getCircleOption: function () {
         return R.path(["options", "config", "circle"], this.props);
     },
+    validate: function() {
+     return new t.ValidationResult({ errors: [], value: this.state.value });
+      },
     render: function () {
         return (
             <Button
