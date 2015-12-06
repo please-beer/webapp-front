@@ -76,7 +76,7 @@ var CampaignEdit = React.createClass({
     ],
     launch: function () {
         ceres.getCollection("campaigns").update(
-            this.props.prarams._id,
+            this.props.params._id,
             {public: true}
         );
     },

@@ -16,8 +16,8 @@ var CampaignCard = React.createClass({
     },
     onClick: function () {
         var append = ""; 
-        if (this.props.linkTo=="edit") append= this.props.linkTo;
-        this.history.pushState(null,"campaign" +"/"+this.props.campaign.get("_id")+"/"+append);
+        if (this.props.linkTo=="edit") append= this.props.linkTo+"/";
+        this.history.pushState(null,"/campaign" +"/"+this.props.campaign.get("_id")+"/"+append);
 
     },
     render: function () {

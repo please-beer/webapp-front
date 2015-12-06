@@ -1,21 +1,23 @@
 var Immutable = require("immutable");
 var R         = require("ramda");
 var React     = require("react");
+var Router     = require("react-router");
+var History     = Router.History;
 
 var components  = require("components");
 var pure        = require("lib/pure");
 var RouterMixin = require("lib/router-mixin");
 
 var OrganizationCard = React.createClass({
-    mixins: [RouterMixin],
+    mixins: [History],
     propTypes: {
         organization: React.PropTypes.instanceOf(Immutable.Map),
-        linkTo: React.PropTypes.oneOf(["View", "Edit"])
+        linkTo: React.PropTypes.oneOf(["view", "edit"])
     },
     onClick: function () {
-        this.context.router.transitionTo("organization" + this.props.linkTo, {
-            _id: this.props.organization.get("_id")
-        });
+        var append = ""; 
+        if (this.props.linkTo=="edit") append= this.props.linkTo+"/";
+        this.history.pushState(null,"/organization" +"/"+this.props.organization.get("_id")+"/"+append);
     },
     render: function () {
         return (

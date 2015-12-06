@@ -88,7 +88,7 @@ var AutosaveForm = React.createClass({
             } else {
                 modifier = delta;
             }
-            ceres.getCollection(this.props.collectionName).update(this.props.itemId, modifier);
+            ceres.getCollection(this.props.collectionName).update(this.props.itemId, modifier);//remote.then(null, function(error) { console.log(error);});
         }
     }, 1000),
     onChange: function (value) {
