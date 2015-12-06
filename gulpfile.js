@@ -83,6 +83,26 @@ gulp.task("tests", function () {
 });
 
 /*
+*   Task to run unit tests quickly - without coverage
+*/
+gulp.task("quicktests", function () {
+    var runTests = function () {
+        gulp.src("./tests/unit/**/*.jsx")
+            .pipe(mocha({
+                compilers: ".:./tests/compiler.js",
+                reporter: "mochawesome",
+                noExit: true,
+                env: {
+                    NODE_PATH: "./app/",
+                    MOCHAWESOME_REPORTDIR: "./builds/tests/",
+                    MOCHAWESOME_REPORTNAME: "index"
+                }
+            }));
+    };
+    watch(["./app/**/*.jsx", "./tests/unit/**/*.jsx"], runTests);
+    runTests();
+});
+/*
 *   Task to run unit test and istanbul coverage with gulp-jsx-coverage
 */
 require('gulp').task('coverage', require('gulp-jsx-coverage').createTask({

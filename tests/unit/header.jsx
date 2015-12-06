@@ -23,15 +23,12 @@ describe("The Header component", function () {
         var users = Immutable.fromJS({
             userId: {
                 profile: {
-                    username: "username"
+                    name: "username"
                 }
             }
         });
 
-        var result = render(
-            <Header users={users} userId={"userId"} />
-        );
-        
-        should(result.props.children[1]).match(reg("username"));
+        var result = ReactDOMServer.renderToStaticMarkup(<Header users={users} userId={"userId"} />);
+        should(result).containEql("username");
     });
 });
