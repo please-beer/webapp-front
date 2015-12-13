@@ -45,13 +45,14 @@
     "react-avatar-editor": "git://github.com/please-beer/react-avatar-editor",
     "react-router": "^1.0.0-rc4",
     "react-addons-linked-state-mixin": "^0.14.2",
-    "history": "^1.13.0",
+    "history": "1.13.0",
     "remarkable": "^1.6.0",
     "tcomb": "^2.5.2",
     "tcomb-form": "^0.7.6",
     "tcomb-validation": "^2.2.0"
   },
   "scripts": {
+    "start": "gulp"
     "test": "gulp coverage"
   },
   "license": "MIT"
