@@ -88,7 +88,7 @@ var AutosaveForm = React.createClass({
             } else {
                 modifier = delta;
             }
-            ceres.getCollection(this.props.collectionName).update(this.props.itemId, modifier);//remote.then(null, function(error) { console.log(error);});
+            ceres.getCollection(this.props.collectionName).update(this.props.itemId, modifier).remote.then(null, function(error) { console.log(error);});
         }
     }, 1000),
     onChange: function (value) {
@@ -115,10 +115,10 @@ var AutosaveForm = React.createClass({
             [props.itemId].concat(props.path) :
             [props.itemId]
         );
-        return (
-            props.collection.getIn(path) ||
-            Immutable.Map()
-        ).toJS();
+        var found = props.collection.getIn(path);
+        if (!found) return Immutable.Map();
+        else if (typeof found.toJS === 'function') return found.toJS();
+        else return found;
     },
     getInitialState: function () {
         return {
@@ -130,9 +130,14 @@ var AutosaveForm = React.createClass({
         *   Overwrite the remote state (the one we get from props) with our
         *   local one, which the user may have modified.
         */
+        console.log("To merge: ");
+        console.log(this.state.value);
         this.setState({
             value: R.merge(this.getValueFromProps(props), this.state.value)
         });
+        console.log("after merge: ");
+        console.log(this.state.value);
+        console.log(this.getValueFromProps(props));
     },
     render: function () {
         return (

@@ -27,15 +27,11 @@ var Header = React.createClass({
             <div className="inner-header">
                 <div className="white-header">{this.renderLogin()}</div>
                 <div className="ac-header">
-                    <div className="logo"><img src="/assets/images/please-beer.png" width="362px" height="auto"/></div>
+                    <div className="logo"><a href="/"><img src="/assets/images/please-beer.png" width="362px" height="auto"/></a></div>
                     <ul className="test-menu">
                         <li><a href="/">Home</a></li>
                         <li><a href="/profile">Profile</a></li>
                         <li><a href="/login">Login</a></li>
-                        <li><a href="/campaign-view">Campaign view</a></li>
-                        <li><a href="/campaign/edit">Campaign edit</a></li>
-                        <li><a href="/organization-view">Organization view</a></li>
-                        <li><a href="/organizatino-edit">organization edit</a></li>
                     </ul>
                 </div>
             </div>

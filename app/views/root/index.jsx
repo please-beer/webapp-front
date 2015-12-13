@@ -19,6 +19,9 @@ var Root = React.createClass({
                 <div className="content">
                    {React.cloneElement(this.props.children, {...this.state})}
                 </div>
+                <div className="footer">
+                    <components.Footer />
+                </div>
             </div>
         );
     }
