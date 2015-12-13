@@ -1,4 +1,4 @@
-var backendUrl = process.env.BACKEND_URL || "localhost:3000";
+var backendUrl =  window.location.hostname+":3000";
 
 var ceres = new Asteroid(backendUrl);
 
