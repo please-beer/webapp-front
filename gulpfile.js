@@ -83,6 +83,26 @@ gulp.task("tests", function () {
 });
 
 /*
+*   Task to run unit tests quickly - without coverage
+*/
+gulp.task("quicktests", function () {
+    var runTests = function () {
+        gulp.src("./tests/unit/**/*.jsx")
+            .pipe(mocha({
+                compilers: ".:./tests/compiler.js",
+                reporter: "mochawesome",
+                noExit: true,
+                env: {
+                    NODE_PATH: "./app/",
+                    MOCHAWESOME_REPORTDIR: "./builds/tests/",
+                    MOCHAWESOME_REPORTNAME: "index"
+                }
+            }));
+    };
+    watch(["./app/**/*.jsx", "./tests/unit/**/*.jsx"], runTests);
+    runTests();
+});
+/*
 *   Task to run unit test and istanbul coverage with gulp-jsx-coverage
 */
 require('gulp').task('coverage', require('gulp-jsx-coverage').createTask({
@@ -164,6 +184,27 @@ gulp.task("css", function () {
 });
 
 
+/*
+*   Tasks to vendor image assets
+*/
+gulp.task("assets", function () {
+    var copyImages = function () {
+        gulp.src("./app/assets/images/**/*.*")
+            .pipe(gulp.dest("./builds/assets/images/"))
+            .pipe(reload({stream: true}));
+    };
+    watch("./app/assets/images/**/*.*", copyImages);
+    copyImages();
+
+    var copyFonts = function () {
+        gulp.src("./app/assets/fonts/**/*.*")
+            .pipe(gulp.dest("./builds/assets/fonts/"))
+            .pipe(reload({stream: true}));
+    };
+    watch("./app/assets/fonts/**/*.*", copyFonts);
+    copyFonts();
+});
+
 
 /*
 *   Task to setup the development server
@@ -198,6 +239,7 @@ gulp.task("default", [
     "js",
     "html",
     "css",
+    "assets",
     //"tests",
     "serve"
 ]);

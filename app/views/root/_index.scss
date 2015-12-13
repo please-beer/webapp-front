@@ -1,17 +1,21 @@
+@font-face {
+  font-family: 'Breathe-Regular';
+  src: url('../fonts/Breathe-Regular.woff2') format('woff2'),
+       url('../fonts/Breathe-Regular.woff') format('woff'),
+       url('../fonts/Breathe-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Breathe-Press';
+  src: url('../fonts/Breathe-Press.woff2') format('woff2'),
+       url('../fonts/Breathe-Press.woff') format('woff'),
+       url('../fonts/Breathe-Press.ttf') format('truetype');
+}
 .av-root {
     .header {
-        position: absolute;
-        background: #ffcc00;
         width: 100%;
-        height: 50px;
-        overflow: scroll;
-        text-align: right;
-        line-height: 50px;
+        overflow: hidden;
     }
     .content {
-        position: absolute;
-        top: 50px;
         width: 100%;
-        height: calc(100% - 50px);
     }
 }

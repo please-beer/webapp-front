@@ -6,3 +6,5 @@ exports.NotFound         = require("./not-found");
 exports.OrganizationEdit = require("./organization-edit");
 exports.OrganizationView = require("./organization-view");
 exports.Profile          = require("./profile");
+exports.Login          = require("./login");
+exports.Logout          = require("./logout");

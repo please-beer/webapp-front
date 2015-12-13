@@ -8,3 +8,4 @@ exports.Panel            = require("./panel");
 exports.RewardCard       = require("./reward-card");
 exports.SquareImage      = require("./square-image");
 exports.SquareImageInput = require("./square-image-input");
+exports.LoginForm = require("./login-form");

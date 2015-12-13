@@ -6,7 +6,8 @@ var components   = require("components");
 var ceres        = require("lib/ceres");
 var pure         = require("lib/pure");
 var editAutosave = require("lib/edit-autosave");
-var RouterMixin  = require("lib/router-mixin");
+var Router     = require("react-router");
+var History     = Router.History;
 
 var organizationType = t.struct({
     name: t.Str,
@@ -17,8 +18,6 @@ var organizationType = t.struct({
 });
 var organizationOptions = {
     fields: {
-        name: {
-        },
         description: {
             type: "textarea"
         },
@@ -34,13 +33,13 @@ var organizationOptions = {
 
 var OrganizationEdit = React.createClass({
     mixins: [
-        RouterMixin,
+        History,
         editAutosave.getMixin("organizations", organizationType, organizationOptions)
     ],
     createCampaign: function () {
         var self = this;
         ceres.getCollection("campaigns").insert({
-            organizationId: self.getParams()._id
+            organizationId: this.props.params._id
         }).remote.then(function (_id) {
             self.context.router.transitionTo("campaignEdit", {
                 _id: _id
@@ -48,11 +47,12 @@ var OrganizationEdit = React.createClass({
         });
     },
     componentWillMount: function () {
-        ceres.subscribe("organizations:byId", this.getParams()._id);
-        ceres.subscribe("campaigns:byOrganization", this.getParams()._id);
+        console.log(this.props.params._id);
+        ceres.subscribe("organizations:byId", this.props.params._id);
+        ceres.subscribe("campaigns:byOrganization", this.props.params._id);
     },
     renderCampaigns: function () {
-        var _id = this.getParams()._id;
+        var _id = this.props.params._id;
         return this.props.campaigns
             .filter(function (campaign) {
                 return campaign.get("organizationId") === _id;
@@ -62,7 +62,7 @@ var OrganizationEdit = React.createClass({
                     <components.CampaignCard
                         key={campaign.get("_id")}
                         campaign={campaign}
-                        linkTo={"Edit"}
+                        linkTo={"edit"}
                     />
                 );
             })
