@@ -28,6 +28,7 @@ module.exports = (
         <Route path="organization/:_id/edit/" component={views.OrganizationEdit} />
         <Route path="organization/:_id/" component={views.OrganizationView} />
         <Route path="profile/" component={views.Profile}  onEnter={requireAuth}/>
+        <Route path="order/" component={views.Order}  onEnter={requireAuth}/>
         <Route path="login/" component={views.Login} />
         <Route path="logout/" component={views.Logout} />
     </Route>
