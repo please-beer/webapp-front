@@ -1,4 +1,5 @@
 exports.AutosaveForm     = require("./autosave-form");
+exports.stripeCard     = require("./stripe-card");
 exports.CampaignCard     = require("./campaign-card");
 exports.Header           = require("./header");
 exports.Footer           = require("./footer");
