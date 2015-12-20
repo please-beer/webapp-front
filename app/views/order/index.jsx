@@ -17,7 +17,7 @@ var Order = React.createClass({
     },
 
     componentWillMount: function () {
-        ceres.call("users:list-cards", .result.then(function(result) {
+        ceres.call("users:list-cards").result.then(function(result) {
             if (result) {
                 this.setState({cards: result.data.result});
             }
