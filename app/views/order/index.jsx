@@ -17,6 +17,8 @@ var Order = React.createClass({
     },
 
     componentWillMount: function () {
+        ceres.subscribe("campaigns:byId", this.props.params.campaign_id);
+
         ceres.call("users:list-cards").result.then(function(result) {
             if (result) {
                 this.setState({cards: result.data.result});
@@ -46,6 +48,8 @@ var Order = React.createClass({
                     return <components.stripeCard key={result.id} data={result}/>;
                     })}
                 </pure.Col>
+                <pure.Col>{this.renderPaymentButton()}</pure.Col>
+            
             </pure.Grid>
             );
         } else {
@@ -111,23 +115,32 @@ var Order = React.createClass({
                         Price
                     </pure.Col>
                 </pure.Col>
-                <pure.Col>
-                    <pure.Col md={"1-3"}>
-                        Warka Strong
-                    </pure.Col>
-                    <pure.Col md={"1-3"}>
-                        12 bottles
-                    </pure.Col>
-                    <pure.Col md={"1-6"}>
-                        1
-                    </pure.Col>
-                    <pure.Col md={"1-6"}>
-                        49 Eur
-                    </pure.Col>
-                </pure.Col>
+                {this.renderOrderItems()}
             </pure.Grid>
             );
 
+    },
+    renderOrderItems() {
+            return this.props.campaigns.map(function(row, i) {
+                var reward = row.get("rewards").slice(this.props.params.reward_index,this.props.params.reward_index+1).values().next();
+                    return (
+                        <pure.Col>
+                            <pure.Col md={"1-3"}>
+                            <b>{row.get("title")}</b><br/>
+                            {row.get("text")}
+                            </pure.Col>
+                            <pure.Col md={"1-3"}>
+                               {reward.value.get("description")}
+                            </pure.Col>
+                            <pure.Col md={"1-6"}>
+                               1
+                            </pure.Col>
+                            <pure.Col md={"1-6"}>
+                                {reward.value.get("price")} Eur
+                            </pure.Col>
+                        </pure.Col>
+                    );
+                }.bind(this));
     },
     render: function () {
         return (
@@ -146,7 +159,6 @@ var Order = React.createClass({
                     <pure.Col md={"1-3"}>
                         <p>{"Payment information:"}</p>
                         {this.renderPaymentInformation()}
-                        {this.renderPaymentButton()}
                     </pure.Col>
                 </pure.Grid>
             </div>

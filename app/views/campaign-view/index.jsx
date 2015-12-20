@@ -1,7 +1,7 @@
-var Immutable = require("immutable");
-var R         = require("ramda");
-var React     = require("react");
-var Router     = require("react-router");
+var Immutable   = require("immutable");
+var R           = require("ramda");
+var React       = require("react");
+var Router      = require("react-router");
 var History     = Router.History;
 
 var components  = require("components");
@@ -24,12 +24,15 @@ var CampaignView = React.createClass({
         ceres.subscribe("campaigns:byId", this.props.params._id);
     },
     renderRewards: function () {
+        var campaignid = this.props.params._id;
         return this.pathTo("rewards") && this.pathTo("rewards")
             .map(function (reward, index) {
                 return (
                     <components.RewardCard
                         key={index}
+                        index={index}
                         reward={reward}
+                        campaign={campaignid}
                     />
                 );
             })

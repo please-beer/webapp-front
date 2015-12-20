@@ -1,15 +1,20 @@
-var Immutable = require("immutable");
-var R         = require("ramda");
-var React     = require("react");
+var Immutable   = require("immutable");
+var R           = require("ramda");
+var React       = require("react");
+var Router      = require("react-router");
+var History     = Router.History;
 
 var components  = require("components");
 
 var RewardCard = React.createClass({
+    mixins: [History],
     propTypes: {
         reward: React.PropTypes.instanceOf(Immutable.Map)
     },
     orderBeer: function() {
-        alert("test");
+        console.log(this.props.index);
+        this.history.pushState(null,"/order" +"/"+this.props.campaign+"/"+this.props.index);
+
     },
     render: function () {
         return (
