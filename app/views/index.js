@@ -8,3 +8,4 @@ exports.OrganizationView = require("./organization-view");
 exports.Profile          = require("./profile");
 exports.Login          = require("./login");
 exports.Logout          = require("./logout");
+exports.Order          = require("./order");
