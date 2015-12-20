@@ -8,6 +8,9 @@ var RewardCard = React.createClass({
     propTypes: {
         reward: React.PropTypes.instanceOf(Immutable.Map)
     },
+    orderBeer: function() {
+        alert("test");
+    },
     render: function () {
         return (
             <components.Panel>
@@ -22,6 +25,7 @@ var RewardCard = React.createClass({
                     <components.Markdown
                         string={this.props.reward.get("description")}
                     />
+                    <div className="button button-buy" onClick={this.orderBeer}>Please Beer!</div>
             </components.Panel>
         );
     }
