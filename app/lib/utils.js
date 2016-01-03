@@ -26,6 +26,11 @@ var filterObjIndexed = R.curry(function filterObjIndexed (filter, object) {
 });
 exports.filterObjIndexed = filterObjIndexed;
 
+
+var loginTokenPath = window.location.protocol+"//"+window.location.hostname+":3000"+"__0__login_token__";
+var loginToken     = localStorage[loginTokenPath];
+exports.loginToken = loginToken;
+
 /*
 *   The object returned by delta is an object containing all properties of obj_2
 *   which differ from those of obj_1. If obj_1 has a property which obj_2

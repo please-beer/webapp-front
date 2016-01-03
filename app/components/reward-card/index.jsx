@@ -12,8 +12,7 @@ var RewardCard = React.createClass({
         reward: React.PropTypes.instanceOf(Immutable.Map)
     },
     orderBeer: function() {
-        console.log(this.props.index);
-        this.history.pushState(null,"/order" +"/"+this.props.campaign+"/"+this.props.index);
+        this.history.pushState(null,"/order" +"/"+this.props.campaign+"/"+this.props.index+"/");
 
     },
     render: function () {

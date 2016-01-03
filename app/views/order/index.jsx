@@ -7,6 +7,8 @@ var components  = require("components");
 var ceres       = require("lib/ceres");
 var pure        = require("lib/pure");
 
+var utils       = require("lib/utils");
+
 var Router      = require("react-router");
 var History     = Router.History;
 
@@ -19,7 +21,7 @@ var Order = React.createClass({
     componentWillMount: function () {
         ceres.subscribe("campaigns:byId", this.props.params.campaign_id);
 
-        ceres.call("users:list-cards").result.then(function(result) {
+        ceres.call("users:list-cards", utils.loginToken).result.then(function(result) {
             if (result) {
                 this.setState({cards: result.data.result});
             }
@@ -122,6 +124,8 @@ var Order = React.createClass({
     },
     renderOrderItems() {
             return this.props.campaigns.map(function(row, i) {
+                var rewards = row.get("rewards");
+                if (rewards) {
                 var reward = row.get("rewards").slice(this.props.params.reward_index,this.props.params.reward_index+1).values().next();
                     return (
                         <pure.Col>
@@ -140,6 +144,11 @@ var Order = React.createClass({
                             </pure.Col>
                         </pure.Col>
                     );
+                } else { 
+                    return (
+                        <pure.Col></pure.Col>
+                        );
+                }
                 }.bind(this));
     },
     render: function () {
