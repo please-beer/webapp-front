@@ -89,7 +89,7 @@ var Order = React.createClass({
     },
     payForBeer: function() {
         this.setState({processing: true});
-        ceres.call("users:pay-for-beer","d9f2146c8a5e2e0276edf47ea2db1f5d","50","12 bottles", "Some nice description of what I have bought",this.state.cards.data[0].id).result.then(function(result) {
+        ceres.call("users:pay-for-beer","d9f2146c8a5e2e0276edf47ea2db1f5d","50","12 bottles", "Some nice description of what I have bought",this.state.cards.data[0].id, utils.loginToken).result.then(function(result) {
             if (result.data) {
                 this.setState({processingResult: {result:"OK", message: result.data.result}});
             }
